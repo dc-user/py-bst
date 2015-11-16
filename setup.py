@@ -9,8 +9,8 @@ def read(fname):
 setup(
     name='pybst',
     version='1.0',
-    url = 'https://github.com/TylerSandman/PyBST',
-    download_url='https://github.com/TylerSandman/PyBST/tree/master/dist',
+    url = 'https://github.com/dc-user/py-bst',
+    download_url='https://github.com/dc-user/py-bst',
     description='Implements Binary Search Trees, AVL Trees, Splay Trees, and Red Black Trees in Python with plotting.',
     long_description=read('README.txt'),
     author='Tyler Sanderson',

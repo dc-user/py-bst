@@ -136,45 +136,42 @@ class AVLTree(BSTree):
         a new Node with key attribute key and value attribute
         value into T. Balances if necessary.
         """
-        if not isinstance(key,(int,long,float)):
-            raise TypeError(str(key) + " is not a number")
+        if not self.Root:
+            self.Root = AVLNode(key,value)
+        elif len(args) == 0:
+            if not self.get_node(key,self.Root):
+                self.insert(key,value,self.Root)
         else:
-            if not self.Root:
-                self.Root = AVLNode(key,value)
-            elif len(args) == 0:
-                if not self.get_node(key,self.Root):
-                        self.insert(key,value,self.Root)
-            else:
-                child = AVLNode(key,value)
-                parent = args[0]
-                if child.key > parent.key:
-                    if not parent.right:
-                        parent.right = child
-                        child.parent = parent
-                        self._update_height(parent)
-                        self._update_balance(parent)
-                        node = child
-                        while node and abs(node.balance) <=1:
-                            node = node.parent
-                        if node:
-                            self._balance(node)
-                    else:
-                        self.insert(key,value,parent.right)
+            child = AVLNode(key,value)
+            parent = args[0]
+            if child.key > parent.key:
+                if not parent.right:
+                    parent.right = child
+                    child.parent = parent
+                    self._update_height(parent)
+                    self._update_balance(parent)
+                    node = child
+                    while node and abs(node.balance) <=1:
+                        node = node.parent
+                    if node:
+                        self._balance(node)
                 else:
-                    if not parent.left:
-                        parent.left = child
-                        child.parent = parent
-                        self._update_height(parent)
-                        self._update_balance(parent)
-                        node = child
-                        while abs(node.balance) <=1:
-                            node = node.parent
-                            if not node:
-                                break
-                        if node:
-                            self._balance(node)
-                    else:
-                        self.insert(key,value,parent.left)
+                    self.insert(key,value,parent.right)
+            else:
+                if not parent.left:
+                    parent.left = child
+                    child.parent = parent
+                    self._update_height(parent)
+                    self._update_balance(parent)
+                    node = child
+                    while abs(node.balance) <=1:
+                        node = node.parent
+                        if not node:
+                            break
+                    if node:
+                        self._balance(node)
+                else:
+                    self.insert(key,value,parent.left)
 
     def insert_from(self,seq):
         """

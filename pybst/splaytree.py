@@ -145,31 +145,28 @@ class SplayTree(BSTree):
         a new Node with key attribute key and value attribute
         value into T and _rotates it to the root of T.
         """
-        if not isinstance(key,(int,long,float)):
-            raise TypeError(str(key) + " is not a number")
+        if not self.Root:
+            self.Root = Node(key,value)
+        elif len(args) == 0:
+            if not self._get_node_without_splaying(key, self.Root):
+                self.insert(key,value,self.Root)
         else:
-            if not self.Root:
-                self.Root = Node(key,value)
-            elif len(args) == 0:
-                if not self._get_node_without_splaying(key, self.Root):
-                    self.insert(key,value,self.Root)
-            else:
-                child = Node(key,value)
-                parent = args[0]
-                if child.key > parent.key:
-                    if not parent.right:
-                        parent.right = child
-                        child.parent = parent
-                        self._rotate_to_root(child)
-                    else:
-                        self.insert(key,value,parent.right)
+            child = Node(key,value)
+            parent = args[0]
+            if child.key > parent.key:
+                if not parent.right:
+                    parent.right = child
+                    child.parent = parent
+                    self._rotate_to_root(child)
                 else:
-                    if not parent.left:
-                        parent.left = child
-                        child.parent = parent
-                        self._rotate_to_root(child)
-                    else:
-                        self.insert(key,value,parent.left)
+                    self.insert(key,value,parent.right)
+            else:
+                if not parent.left:
+                    parent.left = child
+                    child.parent = parent
+                    self._rotate_to_root(child)
+                else:
+                    self.insert(key,value,parent.left)
 
     def insert_from(self,seq):
         """

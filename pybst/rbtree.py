@@ -343,35 +343,31 @@ class RBTree(BSTree):
         Note: For more information on the cases to be considered for insertion,
         see: http://en.wikipedia.org/wiki/Red-black_tree
         """
-        if not isinstance(key,(int,long,float)):
-            raise TypeError(str(key) + " is not a number")
+        if not self.Root:
+            self.Root = RBNode(key,value)
+            self.Root.color = 'k'
+        elif len(args) == 0:
+            if not self.get_node(key,self.Root):
+                self.insert(key,value,self.Root)
         else:
-            if not self.Root:
-                self.Root = RBNode(key,value)
-                self.Root.color = 'k'
-            elif len(args) == 0:
-                if not self.get_node(key,self.Root):
-                        self.insert(key,value,self.Root)
-
-            else:
-                child = RBNode(key,value)
-                parent = args[0]
-                if child.key > parent.key:
-                    if not parent.right:
-                        parent.right = child
-                        child.parent = parent
-                        if parent.color == 'r':
-                            self._insert_case_one(child)
-                    else:
-                        self.insert(key,value,parent.right)
+            child = RBNode(key,value)
+            parent = args[0]
+            if child.key > parent.key:
+                if not parent.right:
+                    parent.right = child
+                    child.parent = parent
+                    if parent.color == 'r':
+                        self._insert_case_one(child)
                 else:
-                    if not parent.left:
-                        parent.left = child
-                        child.parent = parent
-                        if parent.color == 'r':
-                            self._insert_case_one(child)
-                    else:
-                        self.insert(key,value,parent.left)
+                    self.insert(key,value,parent.right)
+            else:
+                if not parent.left:
+                    parent.left = child
+                    child.parent = parent
+                    if parent.color == 'r':
+                        self._insert_case_one(child)
+                else:
+                    self.insert(key,value,parent.left)
 
     def insert_from(self,seq):
         """
