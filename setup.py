@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name='pybst',
-    version='1.0',
+    version='5000.0.0',
     url = 'https://github.com/dc-user/py-bst',
     download_url='https://github.com/dc-user/py-bst',
     description='Implements Binary Search Trees, AVL Trees, Splay Trees, and Red Black Trees in Python with plotting.',
