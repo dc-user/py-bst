@@ -18,7 +18,7 @@
 
 import matplotlib.pyplot as plt
 import networkx as nx
-import bstree as bst
+from pybst import bstree as bst
 
 def _get_pos_list(tree):
     """

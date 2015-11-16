@@ -17,7 +17,7 @@
 # along with PyBST.  If not, see <http://www.gnu.org/licenses/>.
 
 import collections
-import bstree
+from pybst import bstree
 
 Node = bstree.Node
 BSTree = bstree.BSTree
